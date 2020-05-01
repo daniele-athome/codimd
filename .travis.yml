@@ -14,6 +14,9 @@ script:
   - npm run test:ci
   - npm run build
 
+before_deploy:
+  - rm -f .gitignore
+
 deploy:
   provider: pages
   skip_cleanup: true
