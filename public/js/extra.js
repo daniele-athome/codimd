@@ -1123,7 +1123,15 @@ export const md = markdownit('default', {
   langPrefix: '',
   linkify: true,
   typographer: true,
-  highlight: highlightRender
+  highlight: highlightRender,
+  // support for Notable @attachment notation for images and links
+  modifyToken: function (token, env) {
+    if (token.type === 'image' && typeof token.attrObj.src === 'string' && token.attrObj.src.startsWith('@attachment/')) {
+      token.attrObj.src = '/uploads/' + token.attrObj.src.slice('@attachment/'.length)
+    } else if (token.type === 'link_open' && typeof token.attrObj.href === 'string' && token.attrObj.href.startsWith('@attachment/')) {
+      token.attrObj.href = '/uploads/' + token.attrObj.href.slice('@attachment/'.length)
+    }
+  }
 })
 window.md = md
 
@@ -1144,6 +1152,7 @@ md.use(require('markdown-it-mathjax')({
 }))
 md.use(require('markdown-it-imsize'))
 md.use(require('markdown-it-ruby'))
+md.use(require('markdown-it-modify-token'))
 
 window.emojify.setConfig({
   blacklist: {
