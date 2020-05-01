@@ -6,6 +6,10 @@ node_js:
 dist: xenial
 cache: npm
 
+branches:
+  only:
+    - master
+
 script:
   - npm run test:ci
   - npm run build
