@@ -803,7 +803,7 @@ function changeMode (type) {
       break
   }
   // save mode to url
-  if (history.replaceState && window.loaded) history.replaceState(null, '', serverurl + '/' + noteid + '?' + appState.currentMode.name)
+  if (history.replaceState && window.loaded) history.replaceState(null, '', serverurl + '/' + encodeURIComponent(noteid) + '?' + appState.currentMode.name)
   if (appState.currentMode === modeType.view) {
     editor.getInputField().blur()
   }
