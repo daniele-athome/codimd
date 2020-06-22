@@ -179,7 +179,7 @@ historyList.on('updated', e => {
       const pin = itemEl.find('.ui-history-pin')
       const tagsEl = itemEl.find('.tags')
       // parse link to element a
-      a.attr('href', `${serverurl}/${values.id}`)
+      a.attr('href', `${serverurl}/${encodeURIComponent(values.id)}`)
       // parse pinned
       if (values.pinned) {
         pin.addClass('active')
